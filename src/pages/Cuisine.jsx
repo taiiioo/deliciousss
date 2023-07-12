@@ -21,12 +21,19 @@ function Cuisine() {
   }, [params.category]);
 
   return (
-    <Grid>
+    <Grid
+      animate={{ opacity: 1 }}
+      initia={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       {cuisine.map((recipe) => {
         return (
           <Card key={recipe.id}>
-            <img src={recipe.image} alt="" />
-            <h4>{recipe.title}</h4>
+            <Link to={"/recipe/" + recipe.id}>
+              <img src={recipe.image} alt="" />
+              <h4>{recipe.title}</h4>
+            </Link>
           </Card>
         );
       })}
@@ -34,7 +41,7 @@ function Cuisine() {
   );
 }
 
-const Grid = styled.div`
+const Grid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-gap: 3rem;
